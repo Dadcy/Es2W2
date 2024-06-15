@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {  Button, Form } from 'react-bootstrap'
 
-export default function AddComment({elementId}) {
+export default function AddComment({elementId,setUpdateReviews,updateReviews}) {
   
   const[objComment,setObjComment]= useState({ comment: '', rate: 0, elementId: elementId})
   //Ogni evento di default passa l'oggetto evento
@@ -32,9 +32,10 @@ export default function AddComment({elementId}) {
         body: JSON.stringify(objComment), //converte in una stringa JSON e lo invia
       }).then((response) => response.json())
     .then((json) => {
-     console.log(json)
-     alert('Il commento è stato aggiunto')
-    setObjComment({comment: '', rate: 0, elementId: elementId})
+      // console.log(json)
+      // alert('Il commento è stato aggiunto')
+      setUpdateReviews(!updateReviews) //visualizza il commento all'istante
+      setObjComment({comment: '', rate: 0, elementId: elementId})
     })
     .catch(error => console.error(error))
   }
